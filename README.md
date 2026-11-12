@@ -1,58 +1,61 @@
 # E-Learning Web
 
-A PHP and MySQL e-learning web application created as a final-year project. The frontend uses HTML, CSS, JavaScript and Bootstrap for a web-based course learning experience.
+A PHP and MySQL learning management system developed as a final-year project, with a Bootstrap-based web interface for students and administrators.
 
-## Project overview
+## Features represented in the source
 
-The archived project lists course browsing, student profiles, lesson viewing and an administration area for managing course content and student records. These features are described by the existing documentation and archive index; they have not been verified by running the application.
+- Course browsing and course detail pages.
+- Student registration, profiles, enrolled courses and lesson viewing.
+- Administration pages for courses, lessons, students, feedback and sales reports.
+- Legacy Paytm checkout integration, configured for the test environment.
+
+These features are present in the recovered source. A full application runtime test has not yet been performed.
 
 ## Technology stack
 
 | Layer | Technologies |
 | --- | --- |
-| Frontend | HTML, CSS, JavaScript, Bootstrap |
-| Backend | PHP |
+| Frontend | HTML, CSS, JavaScript, jQuery, Bootstrap |
+| Backend | PHP with mysqli |
 | Database | MySQL |
 
-## Repository status
-
-The application was uploaded as `E-Learning-Website.zip` rather than browsable source files. An integrity check of the current archive failed with invalid ZIP file headers. Although its file index can be read, its application contents could not be reliably extracted.
-
-The original archive has been retained unchanged. A fresh, valid copy of the source is required before the project can be restored, reviewed or run reliably.
-
-## Expected source layout
-
-The archive index indicates the following layout:
+## Repository layout
 
 ```text
-ELearning/          PHP application, frontend assets and student pages
-ELearning/Admin/    Administrative pages
-ELearning/Student/  Student profile and lesson pages
-SQL/lms_db.sql      Database export
-website-images/    Project screenshots
+ELearning/             PHP application and frontend assets
+ELearning/Admin/       Administration interface
+ELearning/Student/     Student interface
+ELearning/PaytmKit/    Legacy payment integration
+SQL/lms_db.sql         Sanitized database schema, without user data
+.env.example          Required environment variable names
+E-Learning-Website.zip Original archive retained for history; do not use for setup
 ```
 
-These paths describe the archive contents; they are not currently available as extracted files in this repository.
+## Local development setup
 
-## Local setup after source recovery
+1. Use a local PHP web server with the `mysqli` extension and a MySQL database. Exact supported versions require runtime verification.
+2. Create an empty database named `lms_db` and import `SQL/lms_db.sql`.
+3. Set `DB_HOST`, `DB_USER`, `DB_PASSWORD` and `DB_NAME` in the PHP server environment. `.env.example` documents the variable names; this application does not automatically load `.env` files.
+4. Serve the `ELearning/` directory through your local PHP server and open `index.php`.
+5. Register a new test student account. The sanitized schema contains no existing student or administrator login. Administrator provisioning must be reviewed locally; no default credentials are published.
+6. Add your own test course images, student images and lesson media as needed. Paths used by the application include `image/stu/`, `lessonvid/` and `video/banvid.mp4`.
 
-1. Restore a valid copy of the original application and SQL schema.
-2. Review the SQL export for personal information and replace sample credentials before importing it into a local MySQL database.
-3. Configure a local PHP web server with MySQL support.
-4. Configure the database connection using local development credentials.
-5. Review any payment integration configuration and use sandbox credentials only.
-6. Open the application through the local web server and verify the student and administrator flows.
+Payment configuration reads `PAYTM_MERCHANT_KEY`, `PAYTM_MERCHANT_MID` and `PAYTM_MERCHANT_WEBSITE` from the server environment. Keep test credentials private. Current compatibility of the legacy payment integration has not been verified.
 
-Exact PHP/MySQL version requirements and installation commands must be confirmed after source recovery. This README does not claim that the current archive is runnable.
+## Source recovery and privacy
+
+The browsable source was recovered from a readable local project copy. The older ZIP already in this repository failed an integrity check and is retained only as an original artifact.
+
+The public recovery copy excludes database records, original merchant credentials, student images, screenshots containing account information, local editor configuration and bundled video files. The SQL file preserves the six-table schema and indexes without publishing accounts, passwords, transactions or feedback.
+
+## Development status
+
+This is a legacy educational portfolio project, not a production-ready service. Authentication, password handling, database queries, uploads and payments require a security review before deployment. No production deployment or passing runtime test is claimed.
 
 ## Planned enhancements
 
-The original documentation identifies multiple tutors, student–tutor discussions, quizzes and live classes as future enhancements, rather than completed features.
+Multiple tutors, discussion forums, quizzes and live classes were listed as future enhancements in the original documentation.
 
-## Screenshots
+## License and attribution
 
-The previous README linked to screenshot files that are not committed as standalone repository assets. Add verified screenshots after the original source and images have been recovered.
-
-## License
-
-This repository includes an [MIT license](LICENSE). Review the licenses of bundled assets and third-party components separately.
+The repository includes an [MIT license](LICENSE). The recovered local README calls the application “iSchool”; that original application naming is retained in the source where present. Check third-party asset and payment library licenses separately.

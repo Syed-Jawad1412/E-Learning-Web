@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.vscode/
+ELearning/image/stu/*
+!ELearning/image/stu/.gitkeep
+ELearning/lessonvid/*
+!ELearning/lessonvid/.gitkeep
+ELearning/video/*
+!ELearning/video/.gitkeep
